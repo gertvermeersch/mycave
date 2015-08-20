@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.vermeersch.mycave.SettingsActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/connection_info"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txtConnectionInfo" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/ipaddress"
+        android:id="@+id/tvIpaddress"
+        android:layout_alignBottom="@+id/txtIpaddress"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtIpaddress"
+        android:enabled="true"
+        android:inputType="text"
+        android:hint="@string/dummyip"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/txtConnectionInfo"
+        android:layout_alignParentEnd="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/username"
+        android:id="@+id/tvUsername"
+        android:layout_below="@id/tvIpaddress"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtUsername"
+        android:enabled="true"
+        android:layout_marginTop="50dp"
+        android:inputType="text"
+        android:layout_below="@id/txtIpaddress"
+        android:layout_alignParentEnd="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/password"
+        android:id="@+id/tvPassword"
+        android:layout_below="@id/tvUsername"
+
+        android:layout_marginTop="50dp" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtPassword"
+        android:enabled="true"
+        android:inputType="textPassword"
+        android:layout_alignBottom="@+id/tvPassword"
+        android:layout_alignParentEnd="true"
+         />
+
+
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/Save"
+        android:onClick="onSave"/>
+
+
+</RelativeLayout>
