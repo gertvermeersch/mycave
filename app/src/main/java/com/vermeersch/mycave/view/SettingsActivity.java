@@ -1,4 +1,4 @@
-package com.vermeersch.mycave;
+package com.vermeersch.mycave.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import com.vermeersch.mycave.R;
 
 public class SettingsActivity extends Activity {
 
@@ -58,6 +60,8 @@ public class SettingsActivity extends Activity {
         edit.putString(getString(R.string.password), ((EditText)findViewById(R.id.txtPassword)).getText().toString());
         edit.commit();
         //leave the screen
+        finish();
+
 
     }
 }
