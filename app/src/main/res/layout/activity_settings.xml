@@ -12,31 +12,14 @@
         android:text="@string/connection_info"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/txtConnectionInfo" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/ipaddress"
-        android:id="@+id/tvIpaddress"
-        android:layout_alignBottom="@+id/txtIpaddress"
-        android:layout_alignParentStart="true" />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtIpaddress"
-        android:enabled="true"
-        android:inputType="text"
-        android:hint="@string/dummyip"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/txtConnectionInfo"
-        android:layout_alignParentEnd="true" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/username"
         android:id="@+id/tvUsername"
-        android:layout_below="@id/tvIpaddress"
+        android:layout_below="@id/txtConnectionInfo"
         android:layout_alignParentStart="true"
         android:layout_marginTop="50dp" />
     <EditText
@@ -46,7 +29,7 @@
         android:enabled="true"
         android:layout_marginTop="50dp"
         android:inputType="text"
-        android:layout_below="@id/txtIpaddress"
+        android:layout_below="@id/txtConnectionInfo"
         android:layout_alignParentEnd="true" />
     <TextView
         android:layout_width="wrap_content"

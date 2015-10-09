@@ -1,5 +1,8 @@
 package com.vermeersch.mycave.model;
 
+import android.util.Log;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -43,7 +46,19 @@ public class LightingStates {
         this.desk_light = desk_light;
     }
 
-    public void setStatesByJson(JSONObject states) {
+
+
+    public void loadFromJson(JSONObject values) throws JSONException{
+
+        try {
+            twilights = values.getBoolean("twilights");
+            standing_lamp = values.getBoolean("standing_lamp");
+            uplighter = values.getBoolean("uplighter");
+            desk_light = values.getBoolean("desklight");
+        } catch (JSONException e) {
+            Log.e("Backend", e.getLocalizedMessage());
+            throw e;
+        }
 
     }
 }

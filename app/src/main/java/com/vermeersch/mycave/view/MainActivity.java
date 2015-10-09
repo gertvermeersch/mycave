@@ -1,9 +1,13 @@
 package com.vermeersch.mycave.view;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.AssetFileDescriptor;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.vermeersch.mycave.AsyncTaskOnPostExecuteHandler;
+import com.vermeersch.mycave.Constants;
 import com.vermeersch.mycave.R;
 import com.vermeersch.mycave.controller.AutomationConnector;
 import com.vermeersch.mycave.model.LightingStates;
@@ -21,6 +26,8 @@ import org.json.JSONObject;
 
 public class MainActivity extends Activity implements AsyncTaskOnPostExecuteHandler {
     private LightingStates lightingStates;
+    private AutomationConnector automationConnector;
+    private BroadcastReceiver lightingUpdateReceiver;
 
 
     @Override
@@ -28,10 +35,40 @@ public class MainActivity extends Activity implements AsyncTaskOnPostExecuteHand
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         lightingStates = new LightingStates();
+        automationConnector = new AutomationConnector("domoticaApp", "D0m0t1c4", getApplicationContext());
+        createBroadcastReceivers();
+    }
+
+    private void createBroadcastReceivers() {
+        this.lightingUpdateReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                try {
+                    JSONObject values = new JSONObject(intent.getStringExtra(Constants.LIGHTSUPDATE_EXTRA));
+                    lightingStates.loadFromJson(values);
+                } catch (JSONException e) {
+                    Log.e("Backed", e.getLocalizedMessage());
+                }
+
+            }
+        };
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(lightingUpdateReceiver, new IntentFilter(Constants.LIGHTSUPDATE_ACTION));
+        automationConnector.startUpdate();
 
 
     }
 
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(lightingUpdateReceiver);
+        automationConnector.stopUpdate();
+        super.onPause();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,8 +109,8 @@ public class MainActivity extends Activity implements AsyncTaskOnPostExecuteHand
 
 
     public void onTest(View view) {
-        AutomationConnector automationConnector = new AutomationConnector("domoticaApp", "D0m0t1c4");
-        automationConnector.startUpdate(this);
+
+        automationConnector.startUpdate();
     }
 
     @Override
