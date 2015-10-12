@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vermeersch.mycave.AsyncTaskOnPostExecuteHandler;
@@ -24,7 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class MainActivity extends Activity implements AsyncTaskOnPostExecuteHandler {
+public class MainActivity extends Activity {
     private LightingStates lightingStates;
     private AutomationConnector automationConnector;
     private BroadcastReceiver lightingUpdateReceiver;
@@ -46,6 +47,11 @@ public class MainActivity extends Activity implements AsyncTaskOnPostExecuteHand
                 try {
                     JSONObject values = new JSONObject(intent.getStringExtra(Constants.LIGHTSUPDATE_EXTRA));
                     lightingStates.loadFromJson(values);
+                    //update screen
+                    ((TextView)findViewById(R.id.tvDesklightState)).setText(lightingStates.isDesk_light()?R.string.on:R.string.off);
+                    ((TextView)findViewById(R.id.tvUpligherState)).setText(lightingStates.isUplighter()?R.string.on:R.string.off);
+                    ((TextView)findViewById(R.id.tvStandingState)).setText(lightingStates.isStanding_lamp()?R.string.on:R.string.off);
+                    ((TextView)findViewById(R.id.tvTwilightState)).setText(lightingStates.isTwilights()?R.string.on:R.string.off);
                 } catch (JSONException e) {
                     Log.e("Backed", e.getLocalizedMessage());
                 }
@@ -53,6 +59,8 @@ public class MainActivity extends Activity implements AsyncTaskOnPostExecuteHand
             }
         };
     }
+
+
 
     @Override
     protected void onResume() {
@@ -108,23 +116,7 @@ public class MainActivity extends Activity implements AsyncTaskOnPostExecuteHand
     }
 
 
-    public void onTest(View view) {
+    public void onSwitch(View view) {
 
-        automationConnector.startUpdate();
-    }
-
-    @Override
-    public void onPostExecute(JSONObject values) {
-        try {
-            lightingStates.setDesk_light(values.getBoolean("desklight"));
-            lightingStates.setStanding_lamp(values.getBoolean("twilight"));
-            lightingStates.setTwilights(values.getBoolean("dual_twilight"));
-            lightingStates.setUplighter(values.getBoolean("uplighter"));
-            //saltlamp
-            //vaporizer
-        }catch(JSONException e) {
-            Log.e("Backend", e.getLocalizedMessage());
-            Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-        }
     }
 }

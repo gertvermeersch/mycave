@@ -51,8 +51,8 @@ public class LightingStates {
     public void loadFromJson(JSONObject values) throws JSONException{
 
         try {
-            twilights = values.getBoolean("twilights");
-            standing_lamp = values.getBoolean("standing_lamp");
+            twilights = values.getBoolean("dual_twilight");
+            standing_lamp = values.getBoolean("twilight");
             uplighter = values.getBoolean("uplighter");
             desk_light = values.getBoolean("desklight");
         } catch (JSONException e) {

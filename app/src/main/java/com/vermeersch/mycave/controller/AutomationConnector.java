@@ -13,9 +13,13 @@ import com.vermeersch.mycave.model.LightingStates;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import android.support.v4.content.LocalBroadcastManager;
@@ -49,6 +53,11 @@ public class AutomationConnector {
 
     public void sendPost(String url, JSONObject payload) {
 
+    }
+
+    public void setOutlet(String path, boolean value) {
+        StatusPoster poster = new StatusPoster();
+        poster.execute(path, value?"true":"false");
     }
 
     public void startUpdate() {
@@ -108,6 +117,52 @@ public class AutomationConnector {
                 else {
                     //TODO: implement
                 }
+            }
+            catch(Exception e) {
+                Log.e("Backend", e.getLocalizedMessage());
+            }
+
+            return new JSONObject();
+        }
+    }
+
+    private class StatusPoster extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            setOutlet(params[0], params[1].contains("true"));
+            return "";
+        }
+
+
+        private JSONObject setOutlet(String path, boolean value) {
+
+            //TODO: fix hard coded path
+            path = Constants.baseUrl + path;
+            String credentials = username + ":" + password;
+            String basicAuth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+            try {
+                JSONObject json = new JSONObject();
+                json.put("value", value);
+                URL url = new URL(path);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Authorization", basicAuth);
+                connection.setDoInput(true);
+                BufferedOutputStream out = new BufferedOutputStream( connection.getOutputStream());
+                out.write(json.toString().getBytes());
+                out.close();
+//                if(connection.getResponseCode() == 200) {
+//                    InputStream in = new BufferedInputStream(connection.getInputStream());
+//                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+//                    String response = reader.readLine();
+//                    Log.d("Backend", response);
+//                    return new JSONObject(response);
+//                }
+//                else {
+//                    //TODO: implement
+//                }
             }
             catch(Exception e) {
                 Log.e("Backend", e.getLocalizedMessage());

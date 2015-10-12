@@ -22,7 +22,7 @@ public class SettingsActivity extends Activity {
         String ipaddress = pref.getString(getString(R.string.ipaddress), "");
         String username = pref.getString(getString(R.string.username), "");
         String password = pref.getString(getString(R.string.password), "");
-        ((EditText)findViewById(R.id.txtIpaddress)).setText(ipaddress);
+
         ((EditText)findViewById(R.id.txtPassword)).setText(password);
         ((EditText)findViewById(R.id.txtUsername)).setText(username);
 
@@ -55,7 +55,7 @@ public class SettingsActivity extends Activity {
         //load the SharedPreferences file and save the data
         SharedPreferences pref = getSharedPreferences(getString(R.string.sharedPreferencesFile), Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = pref.edit();
-        edit.putString(getString(R.string.ipaddress), ((EditText)findViewById(R.id.txtIpaddress)).getText().toString());
+
         edit.putString(getString(R.string.username), ((EditText)findViewById(R.id.txtUsername)).getText().toString());
         edit.putString(getString(R.string.password), ((EditText)findViewById(R.id.txtPassword)).getText().toString());
         edit.commit();

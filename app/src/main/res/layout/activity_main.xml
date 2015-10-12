@@ -4,7 +4,8 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="#c54d1a">
 
 
     <TextView
@@ -15,20 +16,221 @@
         android:id="@+id/tvLighting"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_marginBottom="50sp"
          />
 
+    <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/tvLighting"
+        android:id="@+id/rlStandingLamp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/standinglamp"
-        android:layout_below="@id/tvLighting"
-        android:id="@+id/tvLightingState"/>
+
+        android:id="@+id/tvStanding"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/off"
-        android:layout_toRightOf="@id/tvLightingState"
-        android:layout_below="@id/tvLighting"/>
+        android:layout_toRightOf="@id/tvStanding"
+        android:id="@+id/tvStandingState"
+        android:layout_marginLeft="10sp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:weightSum="2"
+       >
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnStandingOn"
+            android:text="@string/on"
+            android:layout_weight="1"
+            android:onClick="onSwitch"
+            android:tag="standing_on"
+
+            android:background="#6ac502" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnStandingOff"
+            android:text="@string/off"
+            android:layout_weight="1"
+            android:onClick="onSwitchOn"
+            android:tag="standing_off"
+            android:background="#c30404" />
+    </LinearLayout>
+
+</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/rlStandingLamp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rlTwilights"
+       >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/twilights"
+
+            android:id="@+id/tvTwilight"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/off"
+            android:id="@+id/tvTwilightState"
+            android:layout_toRightOf="@id/tvTwilight"
+
+            android:layout_marginLeft="10sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:weightSum="2">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnTwilightOn"
+                android:text="@string/on"
+                android:layout_weight="1"
+                android:onClick="onSwitch"
+                android:tag="twilights_on"
+                android:background="#6ac502"
+                />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnTwilightOff"
+                android:text="@string/off"
+                android:layout_weight="1"
+                android:onClick="onSwitch"
+                android:tag="twilights_off"
+                android:background="#c30404"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/rlTwilights"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rlDesklight"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/desklight"
+
+            android:id="@+id/tvDesklight"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/off"
+            android:id="@+id/tvDesklightState"
+            android:layout_toRightOf="@id/tvDesklight"
+
+            android:layout_marginLeft="10sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:weightSum="2">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnDesklightOn"
+                android:text="@string/on"
+                android:layout_weight="1"
+                android:onClick="onSwitch"
+                android:tag="desklight_on"
+                android:background="#6ac502"
+                />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnDesklightOff"
+                android:text="@string/off"
+                android:layout_weight="1"
+                android:onClick="onSwitch"
+                android:tag="desklight_off"
+                android:background="#c30404"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/rlDesklight"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rlUplighter"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/uplighter"
+
+            android:id="@+id/tvUplighter"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/off"
+            android:layout_toRightOf="@id/tvUplighter"
+            android:id="@+id/tvUpligherState"
+            android:layout_marginLeft="10sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:weightSum="2">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnUplightOn"
+                android:text="@string/on"
+                android:layout_weight="1"
+                android:onClick="onSwitch"
+                android:tag="uplighter_on"
+                android:background="#6ac502"
+
+                />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnUplightOff"
+                android:text="@string/off"
+                android:layout_weight="1"
+                android:onClick="onSwitch"
+                android:tag="uplighter_off"
+                android:background="#c30404"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
 </RelativeLayout>
