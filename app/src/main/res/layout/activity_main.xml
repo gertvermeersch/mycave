@@ -64,7 +64,7 @@
             android:id="@+id/btnStandingOff"
             android:text="@string/off"
             android:layout_weight="1"
-            android:onClick="onSwitchOn"
+            android:onClick="onSwitch"
             android:tag="standing_off"
             android:background="#c30404" />
     </LinearLayout>

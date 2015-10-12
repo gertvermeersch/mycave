@@ -117,6 +117,36 @@ public class MainActivity extends Activity {
 
 
     public void onSwitch(View view) {
+        String selection = (String)view.getTag();
+        Log.d("Outlets", selection);
+        switch (selection) {
+            case("standing_on"):
+                automationConnector.setOutlet("outlets/twilight", true);
+                break;
+            case("standing_off"):
+                automationConnector.setOutlet("outlets/twilight", false);
+                break;
+            case("twilights_on"):
+                automationConnector.setOutlet("outlets/dual_twilight", true);
+                break;
+            case("twilights_off"):
+                automationConnector.setOutlet("outlets/dual_twilight", false);
+                break;
+            case("desklight_on"):
+                automationConnector.setOutlet("outlets/desklight", true);
+                break;
+            case("desklight_off"):
+                automationConnector.setOutlet("outlets/desklight", false);
+                break;
+            case("uplighter_on"):
+                automationConnector.setOutlet("outlets/uplighter", true);
+                break;
+            case("uplighter_off"):
+                automationConnector.setOutlet("outlets/uplighter", false);
+                break;
+            default:
+                break;
+        }
 
     }
 }

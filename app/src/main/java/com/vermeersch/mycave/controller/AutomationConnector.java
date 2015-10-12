@@ -153,16 +153,16 @@ public class AutomationConnector {
                 BufferedOutputStream out = new BufferedOutputStream( connection.getOutputStream());
                 out.write(json.toString().getBytes());
                 out.close();
-//                if(connection.getResponseCode() == 200) {
-//                    InputStream in = new BufferedInputStream(connection.getInputStream());
-//                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-//                    String response = reader.readLine();
-//                    Log.d("Backend", response);
-//                    return new JSONObject(response);
-//                }
-//                else {
-//                    //TODO: implement
-//                }
+                if(connection.getResponseCode() == 200) {
+                    InputStream in = new BufferedInputStream(connection.getInputStream());
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+                    String response = reader.readLine();
+                    Log.d("Backend", response);
+                    return new JSONObject(response);
+                }
+                else {
+                    //TODO: implement
+                }
             }
             catch(Exception e) {
                 Log.e("Backend", e.getLocalizedMessage());
