@@ -56,7 +56,7 @@
             android:onClick="onSwitch"
             android:tag="standing_on"
 
-            android:background="#6ac502" />
+           />
 
         <Button
             android:layout_width="0dp"
@@ -66,7 +66,7 @@
             android:layout_weight="1"
             android:onClick="onSwitch"
             android:tag="standing_off"
-            android:background="#c30404" />
+             />
     </LinearLayout>
 
 </RelativeLayout>
@@ -108,7 +108,7 @@
                 android:layout_weight="1"
                 android:onClick="onSwitch"
                 android:tag="twilights_on"
-                android:background="#6ac502"
+
                 />
 
             <Button
@@ -119,7 +119,7 @@
                 android:layout_weight="1"
                 android:onClick="onSwitch"
                 android:tag="twilights_off"
-                android:background="#c30404"
+
                 />
         </LinearLayout>
 
@@ -162,7 +162,7 @@
                 android:layout_weight="1"
                 android:onClick="onSwitch"
                 android:tag="desklight_on"
-                android:background="#6ac502"
+
                 />
 
             <Button
@@ -173,7 +173,7 @@
                 android:layout_weight="1"
                 android:onClick="onSwitch"
                 android:tag="desklight_off"
-                android:background="#c30404"
+
                 />
         </LinearLayout>
 
@@ -215,7 +215,7 @@
                 android:layout_weight="1"
                 android:onClick="onSwitch"
                 android:tag="uplighter_on"
-                android:background="#6ac502"
+
 
                 />
 
@@ -227,7 +227,7 @@
                 android:layout_weight="1"
                 android:onClick="onSwitch"
                 android:tag="uplighter_off"
-                android:background="#c30404"
+
                 />
         </LinearLayout>
 

@@ -149,10 +149,13 @@ public class AutomationConnector {
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Authorization", basicAuth);
+                connection.setRequestProperty("Content-Type", "application/json");
                 connection.setDoInput(true);
                 BufferedOutputStream out = new BufferedOutputStream( connection.getOutputStream());
+                connection.connect();
                 out.write(json.toString().getBytes());
                 out.close();
+                Log.d("Backend", "" + connection.getResponseCode());
                 if(connection.getResponseCode() == 200) {
                     InputStream in = new BufferedInputStream(connection.getInputStream());
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
