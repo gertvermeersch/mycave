@@ -99,10 +99,17 @@ public class MainActivity extends Activity {
            case R.id.action_settings:
                openSettings();
                return true;
+           case R.id.action_heating:
+               openHeating();
+               return true;
            default:
                return super.onOptionsItemSelected(item);
        }
 
+    }
+
+    private void openHeating() {
+        startActivity(new Intent(this, HeatingActivity.class));
     }
 
     private void openSearch() {

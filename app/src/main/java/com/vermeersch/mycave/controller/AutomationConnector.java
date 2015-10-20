@@ -33,13 +33,22 @@ import android.support.v4.content.LocalBroadcastManager;
 public class AutomationConnector {
     private String username;
     private String password;
-    private LightingStates lightingStates;
+
     private Context context;
     private Runnable updaterRunnable;
     private Handler updaterHandler;
+    private static AutomationConnector automationConnector;
 
-    public AutomationConnector() {
-        lightingStates = new LightingStates();
+
+    public static AutomationConnector getInstance() {
+        if(automationConnector == null) {
+            automationConnector = new AutomationConnector();
+        }
+        return automationConnector;
+    }
+
+    private AutomationConnector() {
+
 
     }
 
@@ -49,6 +58,7 @@ public class AutomationConnector {
         this.password = password;
         this.context = context;
         updaterHandler = new Handler();
+        automationConnector = this;
     }
 
     public void sendPost(String url, JSONObject payload) {
@@ -138,7 +148,6 @@ public class AutomationConnector {
 
         private JSONObject setOutlet(String path, boolean value) {
 
-            //TODO: fix hard coded path
             path = Constants.baseUrl + path;
             String credentials = username + ":" + password;
             String basicAuth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);

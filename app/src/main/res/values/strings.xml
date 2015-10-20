@@ -20,4 +20,14 @@
     <string name="standinglamp">Standing Lamp</string>
     <string name="on">On</string>
     <string name="off">Off</string>
+    <string name="action_heating">Heating</string>
+    <string name="title_activity_heating">HeatingActivity</string>
+    <string name="heating">Heating</string>
+    <string name="begin">Begin</string>
+    <string name="end">End</string>
+    <string name="weekend">Weekend</string>
+    <string name="week">Week</string>
+    <string name="temperature_high">Temperature high</string>
+    <string name="temperature_low">Temperature low</string>
+    <string name="temperature">Temperature</string>
 </resources>
