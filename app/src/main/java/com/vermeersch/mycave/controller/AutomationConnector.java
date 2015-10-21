@@ -8,18 +8,14 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.vermeersch.mycave.Constants;
-import com.vermeersch.mycave.model.LightingStates;
 
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import android.support.v4.content.LocalBroadcastManager;
@@ -65,23 +61,33 @@ public class AutomationConnector {
 
     }
 
-    public void setOutlet(String path, boolean value) {
-        StatusPoster poster = new StatusPoster();
+    public void setRemoteValue(String path, boolean value) {
+        RemoteSetter poster = new RemoteSetter();
         poster.execute(path, value?"true":"false");
     }
 
-    public void startUpdate() {
+    public void startUpdateOutlets() {
 
         updaterRunnable = new Runnable() {
             @Override
             public void run() {
                 StatusGetter statusGetter = new StatusGetter();
+                statusGetter.setIntentType(Constants.LIGHTSUPDATE_ACTION);
                 statusGetter.execute("outlets/all");
+                StatusGetter statusGetter2 = new StatusGetter();
+                statusGetter2.setIntentType(Constants.ATMOSPHEREUPDATE_ACTION);
+                statusGetter2.execute("climate/sensors");
                 updaterHandler.postDelayed(this, Constants.UPDATE_INTERVAL_MS);
             }
         };
         updaterHandler.post(updaterRunnable);
 
+    }
+
+    public void startSingleUpdateHeating() {
+        StatusGetter getter = new StatusGetter();
+        getter.setIntentType(Constants.HEATINGUPDATE_ACTION);
+        getter.execute("climate/config");
     }
 
     public void stopUpdate() {
@@ -91,24 +97,28 @@ public class AutomationConnector {
 
 
     private class StatusGetter extends AsyncTask<String, Void, JSONObject> {
+        private String intentType = "";
 
+        public void setIntentType(String intentType) {
+            this.intentType = intentType;
+        }
 
         @Override
         protected JSONObject doInBackground(String... params) {
-            return getStatusUpdateLighting(params[0]);
+            return getStatusUpdate(params[0]);
 
         }
 
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             //Send intent
-            Intent intent = new Intent(Constants.LIGHTSUPDATE_ACTION);
-            intent.putExtra(Constants.LIGHTSUPDATE_EXTRA, jsonObject.toString());
+            Intent intent = new Intent(intentType);
+            intent.putExtra(Constants.JSON_EXTRA, jsonObject.toString());
             LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
         }
 
-        private JSONObject getStatusUpdateLighting(String path) {
-            //TODO: fix hard coded path
+        private JSONObject getStatusUpdate(String path) {
+            //TODO: fix hard coded credentials
             path = Constants.baseUrl + path;
             String credentials = username + ":" + password;
             String basicAuth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
@@ -136,7 +146,7 @@ public class AutomationConnector {
         }
     }
 
-    private class StatusPoster extends AsyncTask<String, Void, String> {
+    private class RemoteSetter extends AsyncTask<String, Void, String> {
 
 
         @Override
@@ -163,6 +173,63 @@ public class AutomationConnector {
                 BufferedOutputStream out = new BufferedOutputStream( connection.getOutputStream());
                 connection.connect();
                 out.write(json.toString().getBytes());
+                out.close();
+                Log.d("Backend", "" + connection.getResponseCode());
+                if(connection.getResponseCode() == 200) {
+                    InputStream in = new BufferedInputStream(connection.getInputStream());
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+                    String response = reader.readLine();
+                    Log.d("Backend", response);
+                    return new JSONObject(response);
+                }
+                else {
+                    //TODO: implement
+                }
+            }
+            catch(Exception e) {
+                Log.e("Backend", e.getLocalizedMessage());
+            }
+
+            return new JSONObject();
+        }
+    }
+
+    public void postPayload(String path, JSONObject json) {
+        PayloadPoster poster  = new PayloadPoster();
+        poster.setPath(path);
+        poster.execute(json);
+    }
+
+    private class PayloadPoster extends AsyncTask<JSONObject, Void, String> {
+        private String path = "";
+
+        public void setPath(String path) {
+            this.path = path;
+        }
+
+        @Override
+        protected String doInBackground(JSONObject... params) {
+            postPayload(params[0]);
+            return "";
+        }
+
+
+        private JSONObject postPayload(JSONObject payload) {
+
+            path = Constants.baseUrl + path;
+            String credentials = username + ":" + password;
+            String basicAuth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+            try {
+
+                URL url = new URL(path);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Authorization", basicAuth);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoInput(true);
+                BufferedOutputStream out = new BufferedOutputStream( connection.getOutputStream());
+                connection.connect();
+                out.write(payload.toString().getBytes());
                 out.close();
                 Log.d("Backend", "" + connection.getResponseCode());
                 if(connection.getResponseCode() == 200) {

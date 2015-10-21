@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.AssetFileDescriptor;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -13,9 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.vermeersch.mycave.AsyncTaskOnPostExecuteHandler;
 import com.vermeersch.mycave.Constants;
 import com.vermeersch.mycave.R;
 import com.vermeersch.mycave.controller.AutomationConnector;
@@ -29,6 +26,7 @@ public class MainActivity extends Activity {
     private LightingStates lightingStates;
     private AutomationConnector automationConnector;
     private BroadcastReceiver lightingUpdateReceiver;
+    private BroadcastReceiver atmosphereUpdateReceiver;
 
 
     @Override
@@ -45,7 +43,7 @@ public class MainActivity extends Activity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 try {
-                    JSONObject values = new JSONObject(intent.getStringExtra(Constants.LIGHTSUPDATE_EXTRA));
+                    JSONObject values = new JSONObject(intent.getStringExtra(Constants.JSON_EXTRA));
                     lightingStates.loadFromJson(values);
                     //update screen
                     ((TextView)findViewById(R.id.tvDesklightState)).setText(lightingStates.isDesk_light()?R.string.on:R.string.off);
@@ -58,6 +56,20 @@ public class MainActivity extends Activity {
 
             }
         };
+
+        this.atmosphereUpdateReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                try {
+                    JSONObject values = new JSONObject(intent.getStringExtra(Constants.JSON_EXTRA));
+                    Log.d("Backend", values.toString());
+                    ((TextView)findViewById(R.id.tvTemperatureValue)).setText(values.getDouble("currentTemperature") + " °C");
+                    ((TextView)findViewById(R.id.tvHumidityValue)).setText(values.getDouble("currentHumidity") + "%");
+                }catch(JSONException e) {
+
+                }
+            }
+        };
     }
 
 
@@ -66,7 +78,8 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(lightingUpdateReceiver, new IntentFilter(Constants.LIGHTSUPDATE_ACTION));
-        automationConnector.startUpdate();
+        LocalBroadcastManager.getInstance(this).registerReceiver(atmosphereUpdateReceiver, new IntentFilter(Constants.ATMOSPHEREUPDATE_ACTION));
+        automationConnector.startUpdateOutlets();
 
 
     }
@@ -74,6 +87,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onPause() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(lightingUpdateReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(atmosphereUpdateReceiver);
         automationConnector.stopUpdate();
         super.onPause();
     }
@@ -128,28 +142,28 @@ public class MainActivity extends Activity {
         Log.d("Outlets", selection);
         switch (selection) {
             case("standing_on"):
-                automationConnector.setOutlet("outlets/twilight", true);
+                automationConnector.setRemoteValue("outlets/twilight", true);
                 break;
             case("standing_off"):
-                automationConnector.setOutlet("outlets/twilight", false);
+                automationConnector.setRemoteValue("outlets/twilight", false);
                 break;
             case("twilights_on"):
-                automationConnector.setOutlet("outlets/dual_twilight", true);
+                automationConnector.setRemoteValue("outlets/dual_twilight", true);
                 break;
             case("twilights_off"):
-                automationConnector.setOutlet("outlets/dual_twilight", false);
+                automationConnector.setRemoteValue("outlets/dual_twilight", false);
                 break;
             case("desklight_on"):
-                automationConnector.setOutlet("outlets/desklight", true);
+                automationConnector.setRemoteValue("outlets/desklight", true);
                 break;
             case("desklight_off"):
-                automationConnector.setOutlet("outlets/desklight", false);
+                automationConnector.setRemoteValue("outlets/desklight", false);
                 break;
             case("uplighter_on"):
-                automationConnector.setOutlet("outlets/uplighter", true);
+                automationConnector.setRemoteValue("outlets/uplighter", true);
                 break;
             case("uplighter_off"):
-                automationConnector.setOutlet("outlets/uplighter", false);
+                automationConnector.setRemoteValue("outlets/uplighter", false);
                 break;
             default:
                 break;

@@ -23,5 +23,145 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvTemp"
         android:text="@string/temperature"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_below="@id/tvHeating"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/tvTemp"
+        android:id="@+id/llTemperature">
+        <EditText
+            android:layout_width="50sp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textColor="@android:color/holo_blue_dark"
+            android:id="@+id/etTemperatureLow"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "/>
+
+        <EditText
+            android:layout_width="50sp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textColor="@android:color/holo_red_dark"
+            android:id="@+id/etTemperatureHigh"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/week"
+        android:layout_below="@id/tvTemp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginTop="30sp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/llTemperature"
+        android:id="@+id/llWeekMorning">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/begin"/>
+        <EditText
+            android:layout_width="60sp"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:id="@+id/etBeginWeekMorning"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end"/>
+        <EditText
+            android:layout_width="60sp"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:id="@+id/etEndWeekMorning"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/llWeekMorning"
+        android:id="@+id/llWeekEvening">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/begin"/>
+        <EditText
+            android:layout_width="60sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/etBeginWeekEvening"
+            android:inputType="time"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end"/>
+        <EditText
+            android:layout_width="60sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/etEndWeekEvening"
+            android:inputType="time"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weekend"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@id/llWeekEvening"
+        android:layout_marginTop="30sp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/llWeekEvening"
+        android:layout_marginTop="30sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/begin"/>
+        <EditText
+            android:layout_width="60sp"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:id="@+id/etBeginWeekend"/>
+
+       <TextView
+           android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/end"/>
+        <EditText
+            android:layout_width="60sp"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:id="@+id/etEndWeekend"
+            />
+    </LinearLayout>
+    
+    
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/save"
+        android:id="@+id/btnSave"
+        android:onClick="saveValues"/>
 </RelativeLayout>

@@ -30,4 +30,6 @@
     <string name="temperature_high">Temperature high</string>
     <string name="temperature_low">Temperature low</string>
     <string name="temperature">Temperature</string>
+    <string name="atmosphere">Atmosphere</string>
+    <string name="humidity">Humidity</string>
 </resources>
