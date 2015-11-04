@@ -32,4 +32,8 @@
     <string name="temperature">Temperature</string>
     <string name="atmosphere">Atmosphere</string>
     <string name="humidity">Humidity</string>
+    <string name="heatingState">Heater state</string>
+    <string name="targetTemperature">Target temperature</string>
+    <string name="presence">Presence</string>
+
 </resources>

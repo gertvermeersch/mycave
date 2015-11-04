@@ -18,6 +18,7 @@
         android:text="@string/atmosphere"/>
 
     <TextView
+        android:layout_marginTop="20sp"
         android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@id/tvClimate"
@@ -32,6 +33,7 @@
         />
 
     <TextView
+        android:layout_marginTop="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTemperature"
@@ -46,36 +48,75 @@
         android:id="@+id/tvHumidityValue"
         />
 
+
+
+        <TextView
+            android:layout_marginTop="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvHumidity"
+            android:id="@+id/tvTargetTemperature"
+            android:text="@string/targetTemperature"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tvTargetTemperature"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/tvTargetTemperatureValue"
+            />
+
+        <TextView
+            android:layout_marginTop="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTargetTemperature"
+            android:text="@string/presence"
+            android:id="@+id/tvPresence"/>
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/tvTargetTemperature"
+            android:layout_alignBaseline="@id/tvPresence"
+            android:id="@+id/swPresence"
+            android:onClick="onPresenceClick"/>
+
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/lighting"
-        android:id="@+id/tvLighting"
-        android:layout_below="@id/rlAtmosphere"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="50sp"
-         />
+
 
     <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/tvLighting"
-        android:id="@+id/rlStandingLamp">
+        android:id="@+id/rlStandingLamp"
+        android:layout_below="@id/rlAtmosphere"
+        android:layout_marginTop="20sp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/lighting"
+            android:id="@+id/tvLighting"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="20sp"
+            />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/standinglamp"
-
+        android:layout_below="@id/tvLighting"
         android:id="@+id/tvStanding"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/off"
+        android:layout_below="@id/tvLighting"
         android:layout_toRightOf="@id/tvStanding"
         android:id="@+id/tvStandingState"
         android:layout_marginLeft="10sp"/>
@@ -83,6 +124,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tvLighting"
         android:layout_alignParentEnd="true"
         android:weightSum="2"
        >

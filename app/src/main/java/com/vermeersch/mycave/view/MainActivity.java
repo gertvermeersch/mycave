@@ -5,12 +5,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.vermeersch.mycave.Constants;
@@ -65,6 +67,18 @@ public class MainActivity extends Activity {
                     Log.d("Backend", values.toString());
                     ((TextView)findViewById(R.id.tvTemperatureValue)).setText(values.getDouble("currentTemperature") + " °C");
                     ((TextView)findViewById(R.id.tvHumidityValue)).setText(values.getDouble("currentHumidity") + "%");
+                    ((TextView)findViewById(R.id.tvTargetTemperatureValue)).setText(String.format("%.1f °C", values.getDouble("targetTemperature")));
+                    if(values.getBoolean("heating")) {
+                        ((TextView)findViewById(R.id.tvTargetTemperature)).setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                    } else {
+                        int color = ((TextView)findViewById(R.id.tvTargetTemperature)).getTextColors().getDefaultColor();
+                        ((TextView)findViewById(R.id.tvTargetTemperature)).setTextColor(color);
+                    }
+                    if(values.getBoolean("override_athome") || ( values.getBoolean("athome") && !values.getBoolean("override_away"))) {
+                        ((Switch)findViewById(R.id.swPresence)).setChecked(true);
+                    } else {
+                        ((Switch)findViewById(R.id.swPresence)).setChecked(false);
+                    }
                 }catch(JSONException e) {
 
                 }
@@ -169,5 +183,10 @@ public class MainActivity extends Activity {
                 break;
         }
 
+    }
+
+    public void onPresenceClick(View view) {
+        boolean value = ((Switch)view).isChecked();
+        automationConnector.setRemoteValue("/climate/at_home", value);
     }
 }
