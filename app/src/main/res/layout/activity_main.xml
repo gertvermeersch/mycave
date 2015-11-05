@@ -105,6 +105,13 @@
             android:layout_marginBottom="20sp"
             />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/led"
+            android:onClick="openColourPicker"
+            android:layout_alignParentEnd="true"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -311,8 +318,14 @@
                 android:tag="uplighter_off"
 
                 />
+
+
         </LinearLayout>
 
+
+
     </RelativeLayout>
+
+
 
 </RelativeLayout>

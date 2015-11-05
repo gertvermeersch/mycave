@@ -66,7 +66,7 @@ public class AutomationConnector {
         poster.execute(path, value?"true":"false");
     }
 
-    public void startUpdateOutlets() {
+    public void startUpdatePeripherals() {
 
         updaterRunnable = new Runnable() {
             @Override

@@ -1,20 +1,27 @@
 package com.vermeersch.mycave.view;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.larswerkman.lobsterpicker.LobsterPicker;
 import com.vermeersch.mycave.Constants;
 import com.vermeersch.mycave.R;
 import com.vermeersch.mycave.controller.AutomationConnector;
@@ -24,11 +31,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements ColourPickerFragment.OnColourPickerFragmentListener {
     private LightingStates lightingStates;
     private AutomationConnector automationConnector;
     private BroadcastReceiver lightingUpdateReceiver;
     private BroadcastReceiver atmosphereUpdateReceiver;
+    private int colour;
 
 
     @Override
@@ -93,7 +101,7 @@ public class MainActivity extends Activity {
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(lightingUpdateReceiver, new IntentFilter(Constants.LIGHTSUPDATE_ACTION));
         LocalBroadcastManager.getInstance(this).registerReceiver(atmosphereUpdateReceiver, new IntentFilter(Constants.ATMOSPHEREUPDATE_ACTION));
-        automationConnector.startUpdateOutlets();
+        automationConnector.startUpdatePeripherals();
 
 
     }
@@ -187,6 +195,51 @@ public class MainActivity extends Activity {
 
     public void onPresenceClick(View view) {
         boolean value = ((Switch)view).isChecked();
-        automationConnector.setRemoteValue("/climate/at_home", value);
+        automationConnector.setRemoteValue("climate/at_home", value);
+    }
+
+    public void openColourPicker(View view) {
+        ColourPickerFragment colourPickerDialogFragment = new ColourPickerFragment();
+
+        colourPickerDialogFragment.show(getFragmentManager(), "ColourPicker");
+    }
+
+
+
+    @Override
+    public void onColourSelected(int colour) {
+        this.colour = colour;
+        try {
+            JSONObject payload = new JSONObject();
+            payload.put("red", Color.red(colour));
+            payload.put("green", Color.green(colour));
+            payload.put("blue", Color.blue(colour));
+            JSONObject wrapper = new JSONObject();
+            wrapper.put("values", payload);
+            AutomationConnector.getInstance().postPayload("ledstrip/rgb", wrapper);
+        } catch(JSONException e) {
+            Log.e("Colour", e.getLocalizedMessage());
+        }
+    }
+
+    @Override
+    public void onLedStripStateChanged(boolean state) {
+        if(state) {
+            onColourSelected(this.colour);
+        } else {
+            try {
+                JSONObject payload = new JSONObject();
+                payload.put("red", 0);
+                payload.put("green", 0);
+                payload.put("blue", 0);
+                JSONObject wrapper = new JSONObject();
+                wrapper.put("values", payload);
+                AutomationConnector.getInstance().postPayload("ledstrip/rgb", wrapper);
+            } catch(JSONException e) {
+                Log.e("Colour", e.getLocalizedMessage());
+            }
+        }
+
+
     }
 }

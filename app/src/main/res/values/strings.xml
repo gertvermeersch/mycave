@@ -35,5 +35,7 @@
     <string name="heatingState">Heater state</string>
     <string name="targetTemperature">Target temperature</string>
     <string name="presence">Presence</string>
+    <string name="cancel">Cancel</string>
+    <string name="led">led</string>
 
 </resources>

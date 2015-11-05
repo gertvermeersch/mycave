@@ -22,7 +22,14 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:support-v4:23.0.1'
+    compile 'com.github.LarsWerkman:Lobsterpicker:1.0.0'
 }
