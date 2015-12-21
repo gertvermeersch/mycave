@@ -47,8 +47,8 @@ public class HeatingActivity extends Activity {
 
         try {
             JSONObject payload = new JSONObject();
-            payload.put("weekend_start_time", ((EditText) findViewById(R.id.etEndWeekend)).getText());
-            payload.put("weekend_stop_time", ((EditText)findViewById(R.id.etBeginWeekEvening)).getText());
+            payload.put("weekend_start_time", ((EditText) findViewById(R.id.etBeginWeekend)).getText());
+            payload.put("weekend_stop_time", ((EditText)findViewById(R.id.etEndWeekend)).getText());
             payload.put("week_start_evening", ((EditText)findViewById(R.id.etBeginWeekEvening)).getText());
             payload.put("week_end_evening", ((EditText)findViewById(R.id.etEndWeekEvening)).getText());
             payload.put("week_start_morning", ((EditText)findViewById(R.id.etBeginWeekMorning)).getText());

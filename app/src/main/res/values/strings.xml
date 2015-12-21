@@ -37,5 +37,6 @@
     <string name="presence">Presence</string>
     <string name="cancel">Cancel</string>
     <string name="led">led</string>
+    <string name="naming_info">Naming</string>
 
 </resources>

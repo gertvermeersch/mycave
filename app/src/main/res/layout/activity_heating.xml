@@ -37,7 +37,8 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:textColor="@android:color/holo_blue_dark"
-            android:id="@+id/etTemperatureLow"/>
+            android:id="@+id/etTemperatureLow"
+            />
 
 
         <TextView
@@ -153,6 +154,7 @@
             android:layout_height="wrap_content"
             android:inputType="time"
             android:id="@+id/etEndWeekend"
+            android:imeOptions="actionDone"
             />
     </LinearLayout>
     

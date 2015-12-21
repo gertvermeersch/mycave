@@ -21,13 +21,13 @@
         android:id="@+id/tvUsername"
         android:layout_below="@id/txtConnectionInfo"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="30dp" />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtUsername"
         android:enabled="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:inputType="text"
         android:layout_below="@id/txtConnectionInfo"
         android:layout_alignParentEnd="true" />
@@ -37,18 +37,28 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/password"
         android:id="@+id/tvPassword"
-        android:layout_below="@id/tvUsername"
+        android:layout_below="@id/txtUsername"
 
-        android:layout_marginTop="50dp" />
+       />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtPassword"
         android:enabled="true"
         android:inputType="textPassword"
-        android:layout_alignBottom="@+id/tvPassword"
         android:layout_alignParentEnd="true"
+        android:layout_below="@id/txtUsername"
          />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/naming_info"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txtNamingInfo"
+        android:layout_below="@id/txtPassword"/>
+
+
 
 
 
