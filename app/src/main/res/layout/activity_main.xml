@@ -90,7 +90,7 @@
     <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-        android:id="@+id/rlStandingLamp"
+        android:id="@+id/rlOutlet1"
         android:layout_below="@id/rlAtmosphere"
         android:layout_marginTop="20sp">
 
@@ -115,16 +115,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/standinglamp"
+        android:text="@string/outlet1"
         android:layout_below="@id/tvLighting"
-        android:id="@+id/tvStanding"/>
+        android:id="@+id/txtOutlet1"/>
 
-    <TextView
+    TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/off"
+        android:text="@string/"
         android:layout_below="@id/tvLighting"
-        android:layout_toRightOf="@id/tvStanding"
+        android:layout_toRightOf="@id/txtOutlet1"
         android:id="@+id/tvStandingState"
         android:layout_marginLeft="10sp"/>
 
@@ -136,10 +136,10 @@
         android:weightSum="2"
        >
 
-        <Button
+        Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/btnStandingOn"
+            android:id="@+id/btnOutlet1On"
             android:text="@string/on"
             android:layout_weight="1"
             android:onClick="onSwitch"
@@ -147,39 +147,44 @@
 
            />
 
-        <Button
+        Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/btnStandingOff"
+            android:id="@+id/btnOutlet1Off"
             android:text="@string/off"
             android:layout_weight="1"
             android:onClick="onSwitch"
             android:tag="standing_off"
              />
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/swOutlet1"
+            android:tag="outlet1"/>
     </LinearLayout>
 
 </RelativeLayout>
 
     <RelativeLayout
-        android:layout_below="@id/rlStandingLamp"
+        android:layout_below="@id/rlOutlet1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rlTwilights"
+        android:id="@+id/rlOutlet2"
        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/twilights"
+            android:text="@string/outlet2"
 
-            android:id="@+id/tvTwilight"/>
+            android:id="@+id/txtOutlet2"/>
 
-        <TextView
+        TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/off"
             android:id="@+id/tvTwilightState"
-            android:layout_toRightOf="@id/tvTwilight"
+            android:layout_toRightOf="@id/txtOutlet2"
 
             android:layout_marginLeft="10sp"/>
 
@@ -189,7 +194,7 @@
             android:layout_alignParentEnd="true"
             android:weightSum="2">
 
-            <Button
+            Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnTwilightOn"
@@ -200,7 +205,7 @@
 
                 />
 
-            <Button
+            Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnTwilightOff"
@@ -210,12 +215,18 @@
                 android:tag="twilights_off"
 
                 />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/swOutlet2"
+                android:tag="outlet2"/>
         </LinearLayout>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_below="@id/rlTwilights"
+        android:layout_below="@id/rlOutlet2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rlDesklight"
@@ -224,16 +235,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/desklight"
+            android:text="@string/outlet3"
 
-            android:id="@+id/tvDesklight"/>
+            android:id="@+id/txtOutlet3"/>
 
-        <TextView
+        TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/off"
             android:id="@+id/tvDesklightState"
-            android:layout_toRightOf="@id/tvDesklight"
+            android:layout_toRightOf="@id/txtOutlet3"
 
             android:layout_marginLeft="10sp"/>
 
@@ -243,7 +254,7 @@
             android:layout_alignParentEnd="true"
             android:weightSum="2">
 
-            <Button
+            Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnDesklightOn"
@@ -254,7 +265,7 @@
 
                 />
 
-            <Button
+            Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnDesklightOff"
@@ -264,6 +275,12 @@
                 android:tag="desklight_off"
 
                 />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/swOutlet3"
+                android:tag="outlet3"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -278,15 +295,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/uplighter"
+            android:text="@string/outlet4"
 
-            android:id="@+id/tvUplighter"/>
+            android:id="@+id/txtOutlet4"/>
 
-        <TextView
+        TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/off"
-            android:layout_toRightOf="@id/tvUplighter"
+            android:layout_toRightOf="@id/txtOutlet4"
             android:id="@+id/tvUpligherState"
             android:layout_marginLeft="10sp"/>
 
@@ -296,10 +313,10 @@
             android:layout_alignParentEnd="true"
             android:weightSum="2">
 
-            <Button
+            Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnUplightOn"
+                android:id="@+id/btnOutlet4On"
                 android:text="@string/on"
                 android:layout_weight="1"
                 android:onClick="onSwitch"
@@ -308,16 +325,22 @@
 
                 />
 
-            <Button
+            Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnUplightOff"
+                android:id="@+id/btnOutlet4Off"
                 android:text="@string/off"
                 android:layout_weight="1"
                 android:onClick="onSwitch"
                 android:tag="uplighter_off"
 
                 />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/swOutlet4"
+                android:tag="outlet4"/>
 
 
         </LinearLayout>
@@ -326,6 +349,64 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlUplighter"
+        android:id="@+id/rlOutlet5">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/outlet5"
+
+            android:id="@+id/txtOutlet5"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:weightSum="2">
+
+
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/swOutlet5"
+                android:tag="outlet5"/>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlOutlet5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/outlet6"
+
+            android:id="@+id/txtOutlet6"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:weightSum="2">
+
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/swOutlet6"
+                android:tag="outlet6"/>
+
+
+        </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

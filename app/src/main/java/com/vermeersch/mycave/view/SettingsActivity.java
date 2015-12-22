@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.vermeersch.mycave.R;
 
@@ -25,6 +26,14 @@ public class SettingsActivity extends Activity {
 
         ((EditText)findViewById(R.id.txtPassword)).setText(password);
         ((EditText)findViewById(R.id.txtUsername)).setText(username);
+
+        
+        ((EditText)findViewById(R.id.edtOutlet1)).setText(pref.getString(getString(R.string.outlet1), getString(R.string.outlet1)));
+        ((EditText)findViewById(R.id.edtOutlet2)).setText(pref.getString(getString(R.string.outlet2), getString(R.string.outlet2)));
+        ((EditText)findViewById(R.id.edtOutlet3)).setText(pref.getString(getString(R.string.outlet3), getString(R.string.outlet3)));
+        ((EditText)findViewById(R.id.edtOutlet4)).setText(pref.getString(getString(R.string.outlet4), getString(R.string.outlet4)));
+        ((EditText)findViewById(R.id.edtOutlet5)).setText(pref.getString(getString(R.string.outlet5), getString(R.string.outlet5)));
+        ((EditText)findViewById(R.id.edtOutlet6)).setText(pref.getString(getString(R.string.outlet6), getString(R.string.outlet6)));
 
     }
 
@@ -58,6 +67,12 @@ public class SettingsActivity extends Activity {
 
         edit.putString(getString(R.string.username), ((EditText)findViewById(R.id.txtUsername)).getText().toString());
         edit.putString(getString(R.string.password), ((EditText)findViewById(R.id.txtPassword)).getText().toString());
+        edit.putString(getString(R.string.outlet1), ((EditText)findViewById(R.id.edtOutlet1)).getText().toString());
+        edit.putString(getString(R.string.outlet2), ((EditText)findViewById(R.id.edtOutlet2)).getText().toString());
+        edit.putString(getString(R.string.outlet3), ((EditText)findViewById(R.id.edtOutlet3)).getText().toString());
+        edit.putString(getString(R.string.outlet4), ((EditText)findViewById(R.id.edtOutlet4)).getText().toString());
+        edit.putString(getString(R.string.outlet5), ((EditText)findViewById(R.id.edtOutlet5)).getText().toString());
+        edit.putString(getString(R.string.outlet6), ((EditText)findViewById(R.id.edtOutlet6)).getText().toString());
         edit.commit();
         //leave the screen
         finish();

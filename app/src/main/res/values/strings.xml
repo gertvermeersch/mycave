@@ -38,5 +38,11 @@
     <string name="cancel">Cancel</string>
     <string name="led">led</string>
     <string name="naming_info">Naming</string>
+    <string name="outlet1">Outlet 1</string>
+    <string name="outlet2">Outlet 2</string>
+    <string name="outlet3">Outlet 3</string>
+    <string name="outlet4">Outlet 4</string>
+    <string name="outlet5">Outlet 5</string>
+    <string name="outlet6">Outlet 6</string>
 
 </resources>

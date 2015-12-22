@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -45,7 +46,30 @@ public class MainActivity extends Activity implements ColourPickerFragment.OnCol
         setContentView(R.layout.activity_main);
         lightingStates = new LightingStates();
         automationConnector = new AutomationConnector("domoticaApp", "D0m0t1c4", getApplicationContext());
+        //load custom names
+        SharedPreferences pref = getSharedPreferences(getString(R.string.sharedPreferencesFile), Context.MODE_PRIVATE);
+        ((TextView)findViewById(R.id.txtOutlet1)).setText(pref.getString(getString(R.string.outlet1), getString(R.string.outlet1)));
+        ((TextView)findViewById(R.id.txtOutlet2)).setText(pref.getString(getString(R.string.outlet2), getString(R.string.outlet2)));
+        ((TextView)findViewById(R.id.txtOutlet3)).setText(pref.getString(getString(R.string.outlet3), getString(R.string.outlet3)));
+        ((TextView)findViewById(R.id.txtOutlet4)).setText(pref.getString(getString(R.string.outlet4), getString(R.string.outlet4)));
+        ((TextView)findViewById(R.id.txtOutlet5)).setText(pref.getString(getString(R.string.outlet5), getString(R.string.outlet5)));
+        ((TextView)findViewById(R.id.txtOutlet6)).setText(pref.getString(getString(R.string.outlet6), getString(R.string.outlet6)));
+
         createBroadcastReceivers();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        if(hasFocus) {
+            SharedPreferences pref = getSharedPreferences(getString(R.string.sharedPreferencesFile), Context.MODE_PRIVATE);
+            ((TextView)findViewById(R.id.txtOutlet1)).setText(pref.getString(getString(R.string.outlet1), getString(R.string.outlet1)));
+            ((TextView)findViewById(R.id.txtOutlet2)).setText(pref.getString(getString(R.string.outlet2), getString(R.string.outlet2)));
+            ((TextView)findViewById(R.id.txtOutlet3)).setText(pref.getString(getString(R.string.outlet3), getString(R.string.outlet3)));
+            ((TextView)findViewById(R.id.txtOutlet4)).setText(pref.getString(getString(R.string.outlet4), getString(R.string.outlet4)));
+            ((TextView)findViewById(R.id.txtOutlet5)).setText(pref.getString(getString(R.string.outlet5), getString(R.string.outlet5)));
+            ((TextView)findViewById(R.id.txtOutlet6)).setText(pref.getString(getString(R.string.outlet6), getString(R.string.outlet6)));
+        }
+        super.onWindowFocusChanged(hasFocus);
     }
 
     private void createBroadcastReceivers() {
@@ -56,10 +80,10 @@ public class MainActivity extends Activity implements ColourPickerFragment.OnCol
                     JSONObject values = new JSONObject(intent.getStringExtra(Constants.JSON_EXTRA));
                     lightingStates.loadFromJson(values);
                     //update screen
-                    ((TextView)findViewById(R.id.tvDesklightState)).setText(lightingStates.isDesk_light()?R.string.on:R.string.off);
+                    /*((TextView)findViewById(R.id.tvDesklightState)).setText(lightingStates.isDesk_light()?R.string.on:R.string.off);
                     ((TextView)findViewById(R.id.tvUpligherState)).setText(lightingStates.isUplighter()?R.string.on:R.string.off);
                     ((TextView)findViewById(R.id.tvStandingState)).setText(lightingStates.isStanding_lamp()?R.string.on:R.string.off);
-                    ((TextView)findViewById(R.id.tvTwilightState)).setText(lightingStates.isTwilights()?R.string.on:R.string.off);
+                    ((TextView)findViewById(R.id.tvTwilightState)).setText(lightingStates.isTwilights()?R.string.on:R.string.off);*/
                 } catch (JSONException e) {
                     Log.e("Backed", e.getLocalizedMessage());
                 }

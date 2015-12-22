@@ -10,31 +10,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/connection_info"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/txtConnectionInfo" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/username"
         android:id="@+id/tvUsername"
         android:layout_below="@id/txtConnectionInfo"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="10dp" />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtUsername"
         android:enabled="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:inputType="text"
         android:layout_below="@id/txtConnectionInfo"
         android:layout_alignParentEnd="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/password"
         android:id="@+id/tvPassword"
         android:layout_below="@id/txtUsername"
@@ -54,18 +54,173 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/naming_info"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/txtNamingInfo"
-        android:layout_below="@id/txtPassword"/>
+        android:layout_below="@id/txtPassword"
+        android:layout_marginBottom="10sp"/>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtNamingInfo"
+        android:id="@+id/lytOutlet1">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/outlet1"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/edtOutlet1"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lytOutlet1"
+        android:id="@+id/lytOutlet2">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/outlet2"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/edtOutlet2"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/lytOutlet2"
+    android:id="@+id/lytOutlet3">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/outlet3"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/edtOutlet3"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lytOutlet3"
+        android:id="@+id/lytOutlet4">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/outlet4"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/edtOutlet4"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lytOutlet4"
+        android:id="@+id/lytOutlet5">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/outlet5"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/edtOutlet5"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lytOutlet5"
+        android:id="@+id/lytOutlet6">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/outlet6"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/edtOutlet6"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
 
 
     <Button
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
         android:text="@string/save"
         android:onClick="onSave"/>
 
