@@ -45,7 +45,7 @@ public class MainActivity extends Activity implements ColourPickerFragment.OnCol
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         lightingStates = new LightingStates();
-        automationConnector = new AutomationConnector("domoticaApp", "D0m0t1c4", getApplicationContext());
+        automationConnector = new AutomationConnector(getApplicationContext());
         //load custom names
         SharedPreferences pref = getSharedPreferences(getString(R.string.sharedPreferencesFile), Context.MODE_PRIVATE);
         ((TextView)findViewById(R.id.txtOutlet1)).setText(pref.getString(getString(R.string.outlet1), getString(R.string.outlet1)));
@@ -60,15 +60,7 @@ public class MainActivity extends Activity implements ColourPickerFragment.OnCol
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-        if(hasFocus) {
-            SharedPreferences pref = getSharedPreferences(getString(R.string.sharedPreferencesFile), Context.MODE_PRIVATE);
-            ((TextView)findViewById(R.id.txtOutlet1)).setText(pref.getString(getString(R.string.outlet1), getString(R.string.outlet1)));
-            ((TextView)findViewById(R.id.txtOutlet2)).setText(pref.getString(getString(R.string.outlet2), getString(R.string.outlet2)));
-            ((TextView)findViewById(R.id.txtOutlet3)).setText(pref.getString(getString(R.string.outlet3), getString(R.string.outlet3)));
-            ((TextView)findViewById(R.id.txtOutlet4)).setText(pref.getString(getString(R.string.outlet4), getString(R.string.outlet4)));
-            ((TextView)findViewById(R.id.txtOutlet5)).setText(pref.getString(getString(R.string.outlet5), getString(R.string.outlet5)));
-            ((TextView)findViewById(R.id.txtOutlet6)).setText(pref.getString(getString(R.string.outlet6), getString(R.string.outlet6)));
-        }
+
         super.onWindowFocusChanged(hasFocus);
     }
 
@@ -80,6 +72,12 @@ public class MainActivity extends Activity implements ColourPickerFragment.OnCol
                     JSONObject values = new JSONObject(intent.getStringExtra(Constants.JSON_EXTRA));
                     lightingStates.loadFromJson(values);
                     //update screen
+                    ((Switch)findViewById(R.id.swOutlet1)).setChecked(lightingStates.isStanding_lamp());
+                    ((Switch)findViewById(R.id.swOutlet2)).setChecked(lightingStates.isTwilights());
+                    ((Switch)findViewById(R.id.swOutlet3)).setChecked(lightingStates.isDesk_light());
+                    ((Switch)findViewById(R.id.swOutlet4)).setChecked(lightingStates.isUplighter());
+                    //((Switch)findViewById(R.id.swOutlet5)).setChecked(lightingStates.isStanding_lamp());
+                    //((Switch)findViewById(R.id.swOutlet6)).setChecked(lightingStates.isStanding_lamp());
                     /*((TextView)findViewById(R.id.tvDesklightState)).setText(lightingStates.isDesk_light()?R.string.on:R.string.off);
                     ((TextView)findViewById(R.id.tvUpligherState)).setText(lightingStates.isUplighter()?R.string.on:R.string.off);
                     ((TextView)findViewById(R.id.tvStandingState)).setText(lightingStates.isStanding_lamp()?R.string.on:R.string.off);
@@ -123,6 +121,15 @@ public class MainActivity extends Activity implements ColourPickerFragment.OnCol
     @Override
     protected void onResume() {
         super.onResume();
+        //refresh the naming
+        SharedPreferences pref = getSharedPreferences(getString(R.string.sharedPreferencesFile), Context.MODE_PRIVATE);
+        ((TextView)findViewById(R.id.txtOutlet1)).setText(pref.getString(getString(R.string.outlet1), getString(R.string.outlet1)));
+        ((TextView)findViewById(R.id.txtOutlet2)).setText(pref.getString(getString(R.string.outlet2), getString(R.string.outlet2)));
+        ((TextView)findViewById(R.id.txtOutlet3)).setText(pref.getString(getString(R.string.outlet3), getString(R.string.outlet3)));
+        ((TextView)findViewById(R.id.txtOutlet4)).setText(pref.getString(getString(R.string.outlet4), getString(R.string.outlet4)));
+        ((TextView)findViewById(R.id.txtOutlet5)).setText(pref.getString(getString(R.string.outlet5), getString(R.string.outlet5)));
+        ((TextView)findViewById(R.id.txtOutlet6)).setText(pref.getString(getString(R.string.outlet6), getString(R.string.outlet6)));
+        //register on broadcasts
         LocalBroadcastManager.getInstance(this).registerReceiver(lightingUpdateReceiver, new IntentFilter(Constants.LIGHTSUPDATE_ACTION));
         LocalBroadcastManager.getInstance(this).registerReceiver(atmosphereUpdateReceiver, new IntentFilter(Constants.ATMOSPHEREUPDATE_ACTION));
         automationConnector.startUpdatePeripherals();
@@ -185,32 +192,32 @@ public class MainActivity extends Activity implements ColourPickerFragment.OnCol
 
     public void onSwitch(View view) {
         String selection = (String)view.getTag();
+        boolean value = ((Switch)view).isChecked();
         Log.d("Outlets", selection);
         switch (selection) {
-            case("standing_on"):
-                automationConnector.setRemoteValue("outlets/twilight", true);
+            case("outlet1"):
+                automationConnector.setRemoteValue("outlets/outlet1", value);
                 break;
-            case("standing_off"):
-                automationConnector.setRemoteValue("outlets/twilight", false);
+
+            case("outlet2"):
+                automationConnector.setRemoteValue("outlets/outlet2", value);
                 break;
-            case("twilights_on"):
-                automationConnector.setRemoteValue("outlets/dual_twilight", true);
+
+            case("outlet3"):
+                automationConnector.setRemoteValue("outlets/outlet3", value);
                 break;
-            case("twilights_off"):
-                automationConnector.setRemoteValue("outlets/dual_twilight", false);
+
+            case("outlet4"):
+                automationConnector.setRemoteValue("outlets/outlet4", value);
                 break;
-            case("desklight_on"):
-                automationConnector.setRemoteValue("outlets/desklight", true);
+
+            case("outlet5"):
+                automationConnector.setRemoteValue("outlets/outlet5", value);
                 break;
-            case("desklight_off"):
-                automationConnector.setRemoteValue("outlets/desklight", false);
+            case("outlet6"):
+                automationConnector.setRemoteValue("outlets/outlet6", value);
                 break;
-            case("uplighter_on"):
-                automationConnector.setRemoteValue("outlets/uplighter", true);
-                break;
-            case("uplighter_off"):
-                automationConnector.setRemoteValue("outlets/uplighter", false);
-                break;
+
             default:
                 break;
         }

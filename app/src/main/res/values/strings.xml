@@ -21,7 +21,7 @@
     <string name="on">On</string>
     <string name="off">Off</string>
     <string name="action_heating">Heating</string>
-    <string name="title_activity_heating">HeatingActivity</string>
+    <string name="title_activity_heating">Heating settings</string>
     <string name="heating">Heating</string>
     <string name="begin">Begin</string>
     <string name="end">End</string>

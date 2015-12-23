@@ -119,14 +119,6 @@
         android:layout_below="@id/tvLighting"
         android:id="@+id/txtOutlet1"/>
 
-    TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/"
-        android:layout_below="@id/tvLighting"
-        android:layout_toRightOf="@id/txtOutlet1"
-        android:id="@+id/tvStandingState"
-        android:layout_marginLeft="10sp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -136,31 +128,13 @@
         android:weightSum="2"
        >
 
-        Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnOutlet1On"
-            android:text="@string/on"
-            android:layout_weight="1"
-            android:onClick="onSwitch"
-            android:tag="standing_on"
 
-           />
-
-        Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnOutlet1Off"
-            android:text="@string/off"
-            android:layout_weight="1"
-            android:onClick="onSwitch"
-            android:tag="standing_off"
-             />
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/swOutlet1"
-            android:tag="outlet1"/>
+            android:tag="outlet1"
+            android:onClick="onSwitch"/>
     </LinearLayout>
 
 </RelativeLayout>
@@ -179,14 +153,6 @@
 
             android:id="@+id/txtOutlet2"/>
 
-        TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/off"
-            android:id="@+id/tvTwilightState"
-            android:layout_toRightOf="@id/txtOutlet2"
-
-            android:layout_marginLeft="10sp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -194,33 +160,14 @@
             android:layout_alignParentEnd="true"
             android:weightSum="2">
 
-            Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnTwilightOn"
-                android:text="@string/on"
-                android:layout_weight="1"
-                android:onClick="onSwitch"
-                android:tag="twilights_on"
 
-                />
-
-            Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnTwilightOff"
-                android:text="@string/off"
-                android:layout_weight="1"
-                android:onClick="onSwitch"
-                android:tag="twilights_off"
-
-                />
 
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/swOutlet2"
-                android:tag="outlet2"/>
+                android:tag="outlet2"
+                android:onClick="onSwitch"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -239,14 +186,7 @@
 
             android:id="@+id/txtOutlet3"/>
 
-        TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/off"
-            android:id="@+id/tvDesklightState"
-            android:layout_toRightOf="@id/txtOutlet3"
 
-            android:layout_marginLeft="10sp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -254,33 +194,15 @@
             android:layout_alignParentEnd="true"
             android:weightSum="2">
 
-            Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnDesklightOn"
-                android:text="@string/on"
-                android:layout_weight="1"
-                android:onClick="onSwitch"
-                android:tag="desklight_on"
 
-                />
 
-            Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnDesklightOff"
-                android:text="@string/off"
-                android:layout_weight="1"
-                android:onClick="onSwitch"
-                android:tag="desklight_off"
-
-                />
 
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/swOutlet3"
-                android:tag="outlet3"/>
+                android:tag="outlet3"
+                android:onClick="onSwitch"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -299,13 +221,7 @@
 
             android:id="@+id/txtOutlet4"/>
 
-        TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/off"
-            android:layout_toRightOf="@id/txtOutlet4"
-            android:id="@+id/tvUpligherState"
-            android:layout_marginLeft="10sp"/>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -313,34 +229,14 @@
             android:layout_alignParentEnd="true"
             android:weightSum="2">
 
-            Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnOutlet4On"
-                android:text="@string/on"
-                android:layout_weight="1"
-                android:onClick="onSwitch"
-                android:tag="uplighter_on"
 
-
-                />
-
-            Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnOutlet4Off"
-                android:text="@string/off"
-                android:layout_weight="1"
-                android:onClick="onSwitch"
-                android:tag="uplighter_off"
-
-                />
 
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/swOutlet4"
-                android:tag="outlet4"/>
+                android:tag="outlet4"
+                android:onClick="onSwitch"/>
 
 
         </LinearLayout>
@@ -374,7 +270,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/swOutlet5"
-                android:tag="outlet5"/>
+                android:tag="outlet5"
+                android:onClick="onSwitch"/>
 
 
         </LinearLayout>
@@ -403,7 +300,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/swOutlet6"
-                android:tag="outlet6"/>
+                android:tag="outlet6"
+                android:onClick="onSwitch"/>
 
 
         </LinearLayout>

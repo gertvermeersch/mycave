@@ -23,7 +23,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp" />
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="200sp"
         android:layout_height="wrap_content"
         android:id="@+id/txtUsername"
         android:enabled="true"
@@ -41,7 +41,7 @@
 
        />
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="200sp"
         android:layout_height="wrap_content"
         android:id="@+id/txtPassword"
         android:enabled="true"
@@ -75,11 +75,12 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="200sp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/edtOutlet1"/>
+                android:id="@+id/edtOutlet1"
+                android:inputType="text"/>
 
         </RelativeLayout>
 
@@ -100,11 +101,12 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="200sp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/edtOutlet2"/>
+                android:id="@+id/edtOutlet2"
+                android:inputType="text"/>
 
         </RelativeLayout>
 
@@ -126,11 +128,12 @@
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="200sp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_alignParentEnd="true"
-            android:id="@+id/edtOutlet3"/>
+            android:id="@+id/edtOutlet3"
+            android:inputType="text"/>
 
     </RelativeLayout>
 
@@ -152,11 +155,12 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="200sp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/edtOutlet4"/>
+                android:id="@+id/edtOutlet4"
+                android:inputType="text"/>
 
         </RelativeLayout>
 
@@ -178,11 +182,12 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="200sp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/edtOutlet5"/>
+                android:id="@+id/edtOutlet5"
+                android:inputType="text"/>
 
         </RelativeLayout>
 
@@ -204,11 +209,12 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="200sp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/edtOutlet6"/>
+                android:id="@+id/edtOutlet6"
+                android:inputType="text"/>
 
         </RelativeLayout>
 

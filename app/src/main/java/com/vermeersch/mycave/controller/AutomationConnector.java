@@ -2,12 +2,14 @@ package com.vermeersch.mycave.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 
 import com.vermeersch.mycave.Constants;
+import com.vermeersch.mycave.R;
 
 import org.json.JSONObject;
 
@@ -18,6 +20,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.prefs.Preferences;
+
 import android.support.v4.content.LocalBroadcastManager;
 
 
@@ -49,9 +53,7 @@ public class AutomationConnector {
     }
 
 
-    public AutomationConnector(String username, String password, Context context) {
-        this.username = username;
-        this.password = password;
+    public AutomationConnector(Context context) {
         this.context = context;
         updaterHandler = new Handler();
         automationConnector = this;
@@ -120,7 +122,7 @@ public class AutomationConnector {
         private JSONObject getStatusUpdate(String path) {
             //TODO: fix hard coded credentials
             path = Constants.baseUrl + path;
-            String credentials = username + ":" + password;
+            String credentials = getCredentials();
             String basicAuth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
             try {
                 URL url = new URL(path);
@@ -146,6 +148,12 @@ public class AutomationConnector {
         }
     }
 
+    private String getCredentials() {
+        SharedPreferences pref = context.getSharedPreferences(context.getString(R.string.sharedPreferencesFile), Context.MODE_PRIVATE);
+        return pref.getString(context.getString(R.string.username),"") + ":" + pref.getString(context.getString(R.string.password),"");
+
+    }
+
     private class RemoteSetter extends AsyncTask<String, Void, String> {
 
 
@@ -159,7 +167,7 @@ public class AutomationConnector {
         private JSONObject setOutlet(String path, boolean value) {
 
             path = Constants.baseUrl + path;
-            String credentials = username + ":" + password;
+            String credentials = getCredentials();
             String basicAuth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
             try {
                 JSONObject json = new JSONObject();
@@ -217,7 +225,7 @@ public class AutomationConnector {
         private JSONObject postPayload(JSONObject payload) {
 
             path = Constants.baseUrl + path;
-            String credentials = username + ":" + password;
+            String credentials = getCredentials();
             String basicAuth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
             try {
 
