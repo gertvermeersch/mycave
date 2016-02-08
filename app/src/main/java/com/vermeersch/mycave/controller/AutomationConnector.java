@@ -120,7 +120,6 @@ public class AutomationConnector {
         }
 
         private JSONObject getStatusUpdate(String path) {
-            //TODO: fix hard coded credentials
             path = Constants.baseUrl + path;
             String credentials = getCredentials();
             String basicAuth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
@@ -137,11 +136,18 @@ public class AutomationConnector {
                     return new JSONObject(response);
                 }
                 else {
-                    //TODO: implement
+                    String errormsg = "Didn't get right response: " + connection.getResponseMessage();
+                    Intent intent = new Intent();
+                    intent.putExtra(Constants.ERROR_EXTRA, errormsg);
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 }
             }
             catch(Exception e) {
                 Log.e("Backend", e.getLocalizedMessage());
+                String errormsg = e.getLocalizedMessage();
+                Intent intent = new Intent();
+                intent.putExtra(Constants.ERROR_EXTRA, errormsg);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             }
 
             return new JSONObject();
@@ -191,11 +197,18 @@ public class AutomationConnector {
                     return new JSONObject(response);
                 }
                 else {
-                    //TODO: implement
+                    String errormsg = "Didn't get right response: " + connection.getResponseMessage();
+                    Intent intent = new Intent();
+                    intent.putExtra(Constants.ERROR_EXTRA, errormsg);
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 }
             }
             catch(Exception e) {
                 Log.e("Backend", e.getLocalizedMessage());
+                String errormsg = e.getLocalizedMessage();
+                Intent intent = new Intent();
+                intent.putExtra(Constants.ERROR_EXTRA, errormsg);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             }
 
             return new JSONObject();
@@ -248,11 +261,18 @@ public class AutomationConnector {
                     return new JSONObject(response);
                 }
                 else {
-                    //TODO: implement
+                    String errormsg = "Didn't get right response: " + connection.getResponseMessage();
+                    Intent intent = new Intent();
+                    intent.putExtra(Constants.ERROR_EXTRA, errormsg);
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 }
             }
             catch(Exception e) {
                 Log.e("Backend", e.getLocalizedMessage());
+                String errormsg = e.getLocalizedMessage();
+                Intent intent = new Intent();
+                intent.putExtra(Constants.ERROR_EXTRA, errormsg);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             }
 
             return new JSONObject();

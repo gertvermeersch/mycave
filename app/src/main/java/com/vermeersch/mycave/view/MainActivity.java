@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.larswerkman.lobsterpicker.LobsterPicker;
 import com.vermeersch.mycave.Constants;
@@ -37,6 +38,7 @@ public class MainActivity extends Activity implements ColourPickerFragment.OnCol
     private AutomationConnector automationConnector;
     private BroadcastReceiver lightingUpdateReceiver;
     private BroadcastReceiver atmosphereUpdateReceiver;
+    private BroadcastReceiver errorReceiver;
     private int colour;
 
 
@@ -76,12 +78,6 @@ public class MainActivity extends Activity implements ColourPickerFragment.OnCol
                     ((Switch)findViewById(R.id.swOutlet2)).setChecked(lightingStates.isTwilights());
                     ((Switch)findViewById(R.id.swOutlet3)).setChecked(lightingStates.isDesk_light());
                     ((Switch)findViewById(R.id.swOutlet4)).setChecked(lightingStates.isUplighter());
-                    //((Switch)findViewById(R.id.swOutlet5)).setChecked(lightingStates.isStanding_lamp());
-                    //((Switch)findViewById(R.id.swOutlet6)).setChecked(lightingStates.isStanding_lamp());
-                    /*((TextView)findViewById(R.id.tvDesklightState)).setText(lightingStates.isDesk_light()?R.string.on:R.string.off);
-                    ((TextView)findViewById(R.id.tvUpligherState)).setText(lightingStates.isUplighter()?R.string.on:R.string.off);
-                    ((TextView)findViewById(R.id.tvStandingState)).setText(lightingStates.isStanding_lamp()?R.string.on:R.string.off);
-                    ((TextView)findViewById(R.id.tvTwilightState)).setText(lightingStates.isTwilights()?R.string.on:R.string.off);*/
                 } catch (JSONException e) {
                     Log.e("Backed", e.getLocalizedMessage());
                 }
@@ -114,6 +110,13 @@ public class MainActivity extends Activity implements ColourPickerFragment.OnCol
                 }
             }
         };
+
+        this.errorReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Toast.makeText(context, intent.getStringExtra(Constants.ERROR_EXTRA), Toast.LENGTH_LONG).show();
+            }
+        };
     }
 
 
@@ -132,6 +135,7 @@ public class MainActivity extends Activity implements ColourPickerFragment.OnCol
         //register on broadcasts
         LocalBroadcastManager.getInstance(this).registerReceiver(lightingUpdateReceiver, new IntentFilter(Constants.LIGHTSUPDATE_ACTION));
         LocalBroadcastManager.getInstance(this).registerReceiver(atmosphereUpdateReceiver, new IntentFilter(Constants.ATMOSPHEREUPDATE_ACTION));
+        LocalBroadcastManager.getInstance(this).registerReceiver(errorReceiver, new IntentFilter(Constants.ERROR_ACTION));
         automationConnector.startUpdatePeripherals();
 
 
@@ -141,6 +145,7 @@ public class MainActivity extends Activity implements ColourPickerFragment.OnCol
     protected void onPause() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(lightingUpdateReceiver);
         LocalBroadcastManager.getInstance(this).unregisterReceiver(atmosphereUpdateReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(errorReceiver);
         automationConnector.stopUpdate();
         super.onPause();
     }
